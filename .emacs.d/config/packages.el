@@ -66,7 +66,7 @@
   :init (which-key-mode)
   :diminish which-key-mode
   :config
-  (setq which-key-idle-delay 0))
+  (setq which-key-idle-delay 0.1))
 
 ;; helpful
 (use-package helpful
@@ -85,11 +85,11 @@
   (general-create-definer rune/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
-    :global-prefix "C-SPC")
+    :global-prefix "M-SPC")
 
   (rune/leader-keys
-    "t"  '(:ignore t :which-key "toggles")
-    "tt" '(counsel-load-theme :which-key "choose theme")))
+    "f"  '(:ignore f :which-key "toggles")
+    "fn" '(counsel-load-theme :which-key "choose theme")))
 ;; evil
 (use-package evil
   :init
@@ -108,3 +108,8 @@
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
