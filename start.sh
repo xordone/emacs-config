@@ -1,3 +1,3 @@
 #!/bin/bash
-cp -f ~/.emacs ~/emacsgit/
+cp -f ~/.emacs ./
 
