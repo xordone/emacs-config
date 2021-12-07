@@ -79,17 +79,5 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-;; general
-(use-package general
-  :config
-  (general-create-definer pxl/leader-keys
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-    :global-prefix "M-SPC")
-
-  (pxl/leader-keys
-    "t"  '(:ignore f :which-key "test")
-    "tt" '(counsel-load-theme :which-key "choose theme")))
-
-;;(when window-system
-;;  (load "~/.emacs.d/config/evil.el"))
+(when window-system
+  (load "~/.emacs.d/config/evil.el"))

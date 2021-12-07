@@ -35,3 +35,4 @@
 ;; Other
 (when window-system
   (load "~/.emacs.d/config/etc.el"))
+(put 'downcase-region 'disabled nil)

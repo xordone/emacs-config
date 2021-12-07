@@ -1,3 +1,14 @@
+(use-package general
+  :after evil
+  :config
+  (general-create-definer pxl/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "M-SPC")
+
+  (pxl/leader-keys
+    "f"  '(:ignore f :which-key "find")
+    "ft" '(counsel-load-theme :which-key "choose theme")))
 ;; evil
 (use-package evil
   :init
