@@ -1,3 +1,10 @@
+;;; For fast config
+;; just a shortcut :)
+(defun my/configure ()
+  "Opens user-init-file"
+  (interactive)
+  (find-file user-init-file))
+(global-set-key (kbd "M-<f12>") 'my/configure)
 ;;; Packages
 ;;;; Packages config
 ;;;;; package
