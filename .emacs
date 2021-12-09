@@ -1,3 +1,4 @@
+;;
 ;;; For fast config
 ;; just a shortcut :)
 (defun my/configure ()
@@ -230,6 +231,9 @@
   ;; unbind M-tab
   (unbind-key "C-M-i" outline-minor-mode-map))
 
+;;;;; auto-complete
+(use-package auto-complete)
+
 ;;;; Spell Checking
 ;;;;; ispell
 (use-package ispell
@@ -311,10 +315,20 @@
 (global-set-key (kbd "<f2>") 'counsel-switch-buffer)
 (global-set-key (kbd "<f5>") 'ispell-word)
 (global-set-key (kbd "<escape>")  'keyboard-escape-quit)
+(global-set-key (kbd "M-SPC") 'set-mark-command)
 ;;; Other
+;;;; Org mode
+(setq org-log-done 'time)
 ;;;; Add to list
-;;;;; .org
+;;;;; modes
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; dirty fix for having AC everywhere
+(define-globalized-minor-mode real-global-auto-complete-mode
+  auto-complete-mode (lambda ()
+                       (if (not (minibufferp (current-buffer)))
+                         (auto-complete-mode 1))
+                       ))
+(real-global-auto-complete-mode t)
 ;;;; Hooks
 ;;;;; Numbers line hook
 (dolist (mode '(org-mode-hook
@@ -325,4 +339,3 @@
 ;;;; Сообщение в буфере scratch
 (when window-system
   (load "~/.emacs.d/config/etc.el"))
-
