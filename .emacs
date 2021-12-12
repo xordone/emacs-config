@@ -1,6 +1,5 @@
 ;;
 ;;; For fast config
-;; just a shortcut :)
 (defun my/configure ()
   "Opens user-init-file"
   (interactive)
@@ -72,14 +71,14 @@
 
   :preface
   (setq
-   my/faces/size 15
+   my/faces/size 18
 
    ;; TODO: make the font selection more robust
    my/faces/fixed-family "Fira Code Retina"
 
    my/faces/variable-family
    (if (string-equal system-type "darwin")
-       "PT Serif"
+       "Fira Code Retina"
      "DejaVu Serif"))
 
   :diminish (buffer-face-mode "")
@@ -234,6 +233,11 @@
 ;;;;; auto-complete
 (use-package auto-complete)
 
+;;;;; beacon
+(use-package beacon
+  :custom
+  (beacon-mode 1))
+
 ;;;; Spell Checking
 ;;;;; ispell
 (use-package ispell
@@ -312,13 +316,22 @@
 ;
 ;;; Keybinding
 ;;;; Global keys
-(global-set-key (kbd "<f2>") 'counsel-switch-buffer)
-(global-set-key (kbd "<f5>") 'ispell-word)
+(if (eq system-type 'gnu/linux)
+    (progn
+    (global-set-key (kbd "<f2>") 'counsel-switch-buffer)
+    (global-set-key (kbd "<f5>") 'ispell-word)
+    ))
 (global-set-key (kbd "<escape>")  'keyboard-escape-quit)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
+(global-set-key (kbd "C-c a") 'org-agenda)
 ;;; Other
 ;;;; Org mode
+(setq org-agenda-files (list "~/org/work.org"
+                             "~/org/todo.org"))
 (setq org-log-done 'time)
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats '("<%a %d.%m.%Y>" . "<%a %b %e %Y %H:%M>"))
+(setq calendar-week-start-day 1)
 ;;;; Add to list
 ;;;;; modes
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -339,3 +352,18 @@
 ;;;; Сообщение в буфере scratch
 (when window-system
   (load "~/.emacs.d/config/etc.el"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files '("~/org/work.org"))
+ '(org-agenda-window-setup 'current-window)
+ '(package-selected-packages
+   '(which-key use-package unkillable-scratch reverse-im rainbow-delimiters outshine ivy-rich helpful doom-themes doom-modeline counsel beacon auto-complete)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
