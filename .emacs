@@ -21,6 +21,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+(setq custom-file "~/.emacs.d/custom.el")
 
 ;;;; General setings
 ;;;;; emacs
@@ -230,9 +231,6 @@
   ;; unbind M-tab
   (unbind-key "C-M-i" outline-minor-mode-map))
 
-;;;;; auto-complete
-(use-package auto-complete)
-
 ;;;;; beacon
 (use-package beacon
   :custom
@@ -335,13 +333,7 @@
 ;;;; Add to list
 ;;;;; modes
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; dirty fix for having AC everywhere
-(define-globalized-minor-mode real-global-auto-complete-mode
-  auto-complete-mode (lambda ()
-                       (if (not (minibufferp (current-buffer)))
-                         (auto-complete-mode 1))
-                       ))
-(real-global-auto-complete-mode t)
+
 ;;;; Hooks
 ;;;;; Numbers line hook
 (dolist (mode '(org-mode-hook
@@ -352,18 +344,3 @@
 ;;;; Сообщение в буфере scratch
 (when window-system
   (load "~/.emacs.d/config/etc.el"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files '("~/org/work.org"))
- '(org-agenda-window-setup 'current-window)
- '(package-selected-packages
-   '(which-key use-package unkillable-scratch reverse-im rainbow-delimiters outshine ivy-rich helpful doom-themes doom-modeline counsel beacon auto-complete)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
