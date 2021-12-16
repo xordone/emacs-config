@@ -369,6 +369,8 @@
 ;;;; Сообщение в буфере scratch
 (when window-system
   (load "~/.emacs.d/config/etc.el"))
-
+;;;; Дополнения для конкретной машинки
+(when window-system
+  (load "~/.emacs.d/config/thissystem.el"))
 
 ;;;; Hacks
