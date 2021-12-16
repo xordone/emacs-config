@@ -1,4 +1,4 @@
-;;
+;
 ;;; For fast config
 (defun my/configure ()
   "Opens user-init-file"
@@ -236,6 +236,16 @@
   :custom
   (beacon-mode 1))
 
+;;;; Code
+;;;;; company
+(use-package company)
+
+;;;;; magit
+(use-package magit)
+
+;;;;; markdown-mode
+(use-package markdown-mode)
+
 ;;;; Spell Checking
 ;;;;; ispell
 (use-package ispell
@@ -311,9 +321,21 @@
 ;  :after evil
 ;  :config
 ;  (evil-collection-init))
-;
+					;
 ;;; Keybinding
 ;;;; Global keys
+;;;;; unset keys
+(global-unset-key (kbd "C-1"))
+(global-unset-key (kbd "C-2"))
+(global-unset-key (kbd "C-4"))
+(global-unset-key (kbd "C-5"))
+(global-unset-key (kbd "C-6"))
+(global-unset-key (kbd "C-7"))
+(global-unset-key (kbd "C-8"))
+(global-unset-key (kbd "C-9"))
+(global-unset-key (kbd "C-0"))
+
+;;;;; set keys
 (if (eq system-type 'gnu/linux)
     (progn
     (global-set-key (kbd "<f2>") 'counsel-switch-buffer)
@@ -341,6 +363,12 @@
 		eshell-mode-hook
 		shell-mode-hook))
   (add-hook mode(lambda () (display-line-numbers-mode 0))))
+;;;;; Company mode
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;;;; Сообщение в буфере scratch
 (when window-system
   (load "~/.emacs.d/config/etc.el"))
+
+
+;;;; Hacks
