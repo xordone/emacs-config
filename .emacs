@@ -1,4 +1,4 @@
-;
+;;
 ;;; For fast config
 (defun my/configure ()
   "Opens user-init-file"
@@ -352,6 +352,19 @@
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%a %d.%m.%Y>" . "<%a %b %e %Y %H:%M>"))
 (setq calendar-week-start-day 1)
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "|" "DONE(d)")
+        (sequence "IMPORTANT(i)" "|" "LOST(l)")))
+(setq org-todo-keyword-faces
+      '(("TODO" . (:foreground "magenta" :weight bold))
+        ("DONE" . (:foreground "lime green" :weight bold))
+        ("IMPORTANT" . (:foreground "deep pink" :weight bold))
+        ("LOST" . (:foreground "OrangeRed1" :weight bold))
+        ))
+(setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+                           (?B . (:foreground "yellow"))
+                           (?C . (:foreground "green"))))
+
 ;;;; Add to list
 ;;;;; modes
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
