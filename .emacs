@@ -169,6 +169,7 @@
   :init (doom-modeline-mode 1)
   :custom (doom-modeline-height 10))
 (doom-modeline-mode 1)
+
 (use-package doom-themes
   :ensure t
   :config
@@ -236,10 +237,10 @@
   :custom
   (beacon-mode 1))
 
-;;;; Code
-;;;;; company
-(use-package company)
+;;;;; fireplace
+(use-package fireplace)
 
+;;;; Code
 ;;;;; magit
 (use-package magit)
 
@@ -344,6 +345,10 @@
 (global-set-key (kbd "<escape>")  'keyboard-escape-quit)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 (global-set-key (kbd "C-c a") 'org-agenda)
+;; 
+(when window-system
+  (load "~/.emacs.d/config/keys.el"))
+
 ;;; Other
 ;;;; Org mode
 (setq org-agenda-files (list "~/org/work.org"
@@ -376,14 +381,12 @@
 		eshell-mode-hook
 		shell-mode-hook))
   (add-hook mode(lambda () (display-line-numbers-mode 0))))
-;;;;; Company mode
-(add-hook 'after-init-hook 'global-company-mode)
 
 ;;;; Сообщение в буфере scratch
 (when window-system
   (load "~/.emacs.d/config/etc.el"))
 ;;;; Дополнения для конкретной машинки
 (when window-system
-  (load "~/.emacs.d/config/thissystem.el"))
+  (load "~/.emacs.d/config/specific.el"))
 
 ;;;; Hacks
