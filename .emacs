@@ -4,10 +4,10 @@
   "Opens user-init-file"
   (interactive)
   (find-file user-init-file))
-(global-set-key (kbd "M-<f12>") 'my/configure)
+(global-set-key (kbd "M-<f1>") 'my/configure)
 ;;; Packages
 ;;;; Packages config
-;;;;; package
+;;;;; packages
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
@@ -161,15 +161,31 @@
   :config
   (setq ivy-initial-inputs-alist nil))
 
-;;;;; doom-modline
+;;;;; all-the-icons
 (use-package all-the-icons)
 (setq inhibit-compacting-font-caches t)
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom (doom-modeline-height 10))
-(doom-modeline-mode 1)
+;;;;; telephone-modeline
+(use-package telephone-line)
+(setq telephone-line-lhs
+      '((evil   . (telephone-line-evil-tag-segment))
+        (accent . (telephone-line-vc-segment
+                   telephone-line-erc-modified-channels-segment
+                   telephone-line-process-segment))
+        (nil    . (telephone-line-minor-mode-segment
+                   telephone-line-buffer-segment))))
+(setq telephone-line-rhs
+      '((nil    . (telephone-line-misc-info-segment))
+        (accent . (telephone-line-major-mode-segment))
+        (evil   . (telephone-line-airline-position-segment))))
 
+(setq telephone-line-primary-left-separator 'telephone-line-tan-left
+      telephone-line-secondary-left-separator 'telephone-line-tan-hollow-left
+      telephone-line-primary-right-separator 'telephone-line-tan-right
+      telephone-line-secondary-right-separator 'telephone-line-tan-hollow-right)
+(setq telephone-line-height 24
+      telephone-line-evil-use-short-tag t)
+(telephone-line-mode 1)
+;;;;; doom-themes
 (use-package doom-themes
   :ensure t
   :config
@@ -186,7 +202,7 @@
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
-
+  ;;all-the-icons-install-fonts
 ;;;;; rainbow-delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -351,8 +367,7 @@
 
 ;;; Other
 ;;;; Org mode
-(setq org-agenda-files (list "~/org/work.org"
-                             "~/org/todo.org"))
+(setq org-agenda-files (list "~/org/todo.org"))
 (setq org-log-done 'time)
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%a %d.%m.%Y>" . "<%a %b %e %Y %H:%M>"))
@@ -373,7 +388,6 @@
 ;;;; Add to list
 ;;;;; modes
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
 ;;;; Hooks
 ;;;;; Numbers line hook
 (dolist (mode '(org-mode-hook
@@ -390,3 +404,7 @@
   (load "~/.emacs.d/config/specific.el"))
 
 ;;;; Hacks
+;;;;; abbrev-mode
+(dolist (hook '(erc-mode-hook
+		text-mode-hook))
+  (add-hook hook #'abbrev-mode))

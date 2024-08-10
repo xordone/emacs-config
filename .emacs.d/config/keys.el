@@ -195,3 +195,6 @@
 (global-set-key (kbd "M-8") 'my-50%-horz)
 (global-unset-key (kbd "M-*"))
 (global-set-key (kbd "M-*") 'my-50%-vert)
+
+(global-set-key (kbd "M-<f12>") 'bookmark-set)
+(global-set-key (kbd "<f12>") 'bookmark-bmenu-list)
