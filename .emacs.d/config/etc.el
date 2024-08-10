@@ -5,7 +5,6 @@ C-h f - functions
 C-h v - variables
 C-h a - apropos
     Links:
-
 http://www.gnu.org/software/emacs/tour/
 http://ergoemacs.org/emacs/elisp.html
 
@@ -13,6 +12,8 @@ http://ergoemacs.org/emacs/elisp.html
 то не забудь сохранить его в итоге.
 M-A-s или C-x C-s
 
+C-c C-c сохранить и закрыть
+C-x a l - Добавить abbrev
 
 
 

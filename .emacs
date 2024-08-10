@@ -5,6 +5,12 @@
   (interactive)
   (find-file user-init-file))
 (global-set-key (kbd "M-<f1>") 'my/configure)
+(defun my/scratch ()
+  (interactive)
+  (find-file "~/.emacs.d/config/etc.el")
+  )
+(global-set-key (kbd "M-<f2>") 'my/scratch)
+
 ;;; Packages
 ;;;; Packages config
 ;;;;; packages
@@ -300,45 +306,6 @@
    mode-specific-map
    ("s" . flyspell-correct-word-before-point)))
 
-;;;; Evil mode
-;;;;; general
-;(use-package general
-;  :after evil
-;  :config
-;  (general-create-definer pxl/leader-keys
-;    :keymaps '(normal insert visual emacs)
-;    :prefix "SPC"
-;    :global-prefix "M-SPC")
-;
-;  (pxl/leader-keys
-;    "f"  '(:ignore f :which-key "find")
-;    "ft" '(isearch-repeat-forward :which-key "choose theme")))
-;
-;;;;; evil
-;(use-package evil
-;  :init
-;  (setq evil-want-integration t)
-;  (setq evil-want-keybinding nil)
-;  (setq evil-want-C-u-scroll t)
-;  (setq evil-want-C-i-jump nil)
-;  :config
-;  (evil-mode 1)
-;  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-;  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join);;
-;
-;  ;; Use visual line motions even outside of visual-line-mode buffers
-;  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-;  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-;
-;  (evil-set-initial-state 'messages-buffer-mode 'normal)
-;  (evil-set-initial-state 'dashboard-mode 'normal))
-;
-;;;;; evil-collection
-;(use-package evil-collection
-;  :after evil
-;  :config
-;  (evil-collection-init))
-					;
 ;;; Keybinding
 ;;;; Global keys
 ;;;;; unset keys
@@ -367,7 +334,7 @@
 
 ;;; Other
 ;;;; Org mode
-(setq org-agenda-files (list "~/org/todo.org"))
+;(setq org-agenda-files (list "~/org/todo.org"))
 (setq org-log-done 'time)
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%a %d.%m.%Y>" . "<%a %b %e %Y %H:%M>"))
@@ -402,6 +369,15 @@
 ;;;; Дополнения для конкретной машинки
 (when window-system
   (load "~/.emacs.d/config/specific.el"))
+
+;;;; funcs
+;;;;; save and kill
+(defun my/savekill ()
+  (interactive)
+  (save-buffer)
+  (kill-this-buffer)
+  )
+(global-set-key (kbd "C-c C-c") 'my/savekill)
 
 ;;;; Hacks
 ;;;;; abbrev-mode
