@@ -71,6 +71,9 @@
   ;;(global-prettify-symbols-mode)
   (prefer-coding-system 'utf-8)
   (put 'overwrite-mode 'disabled t))
+(setq make-backup-files         nil) ; Don't want any backup files
+(setq auto-save-list-file-name  nil) ; Don't want any .saves files
+(setq auto-save-default         nil) ; Don't want any auto saving
 
 ;;;;; faces
 (use-package faces
@@ -171,26 +174,27 @@
 (use-package all-the-icons)
 (setq inhibit-compacting-font-caches t)
 ;;;;; telephone-modeline
-(use-package telephone-line)
-(setq telephone-line-lhs
-      '((evil   . (telephone-line-evil-tag-segment))
-        (accent . (telephone-line-vc-segment
-                   telephone-line-erc-modified-channels-segment
-                   telephone-line-process-segment))
-        (nil    . (telephone-line-minor-mode-segment
-                   telephone-line-buffer-segment))))
-(setq telephone-line-rhs
-      '((nil    . (telephone-line-misc-info-segment))
-        (accent . (telephone-line-major-mode-segment))
-        (evil   . (telephone-line-airline-position-segment))))
-
-(setq telephone-line-primary-left-separator 'telephone-line-tan-left
-      telephone-line-secondary-left-separator 'telephone-line-tan-hollow-left
-      telephone-line-primary-right-separator 'telephone-line-tan-right
-      telephone-line-secondary-right-separator 'telephone-line-tan-hollow-right)
-(setq telephone-line-height 24
-      telephone-line-evil-use-short-tag t)
-(telephone-line-mode 1)
+;(use-package telephone-line)
+;(setq telephone-line-lhs
+;      '((evil   . (telephone-line-evil-tag-segment))
+;        (accent . (telephone-line-vc-segment
+;                   telephone-line-erc-modified-channels-segment
+;                   telephone-line-process-segment))
+;        (nil    . (telephone-line-minor-mode-segment
+;                   telephone-line-buffer-segment))))
+;(setq telephone-line-rhs
+;      '((nil    . (telephone-line-misc-info-segment))
+;        (accent . (telephone-line-major-mode-segment))
+;        (evil   . (telephone-line-airline-position-segment))))
+;
+;(setq telephone-line-primary-left-separator 'telephone-line-tan-left
+;      telephone-line-secondary-left-separator 'telephone-line-tan-hollow-left
+;      telephone-line-primary-right-separator 'telephone-line-tan-right
+;      telephone-line-secondary-right-separator 'telephone-line-tan-hollow-right)
+;(setq telephone-line-height 24
+;      telephone-line-evil-use-short-tag t)
+;
+;(telephone-line-mode 1)
 ;;;;; doom-themes
 (use-package doom-themes
   :ensure t
@@ -198,7 +202,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-tomorrow-night t)
+  (load-theme 'doom-acario-dark t)
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
@@ -219,7 +223,6 @@
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.1))
-
 ;;;;; helpful
 (use-package helpful
   :custom
@@ -334,7 +337,7 @@
 
 ;;; Other
 ;;;; Org mode
-;(setq org-agenda-files (list "~/org/todo.org"))
+(setq org-agenda-files (list "~/org/todo.org"))
 (setq org-log-done 'time)
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%a %d.%m.%Y>" . "<%a %b %e %Y %H:%M>"))
