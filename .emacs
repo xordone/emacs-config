@@ -150,6 +150,30 @@
   :hook
   (after-init . unkillable-scratch))
 ;;;; Beauty 
+;;;;; theme
+(use-package dracula-theme)
+(load-theme 'dracula t)
+;;;;; modeline
+(use-package nano-modeline
+    :ensure t
+    :init
+    (nano-modeline-prog-mode t)
+    :custom
+    (nano-modeline-position 'nano-modeline-footer)
+    :hook
+    (prog-mode           . nano-modeline-prog-mode)
+    (text-mode           . nano-modeline-text-mode)
+    (org-mode            . nano-modeline-org-mode)
+    (pdf-view-mode       . nano-modeline-pdf-mode)
+    (mu4e-headers-mode   . nano-modeline-mu4e-headers-mode)
+    (mu4e-view-mode      . nano-modeline-mu4e-message-mode)
+    (elfeed-show-mode    . nano-modeline-elfeed-entry-mode)
+    (elfeed-search-mode  . nano-modeline-elfeed-search-mode)
+    (term-mode           . nano-modeline-term-mode)
+    (xwidget-webkit-mode . nano-modeline-xwidget-mode)
+    (messages-buffer-mode . nano-modeline-message-mode)
+    (org-capture-mode    . nano-modeline-org-capture-mode)
+    (org-agenda-mode     . nano-modeline-org-agenda-mode))
 ;;;;; ivy
 (use-package ivy
 ;;  :diminish
@@ -173,46 +197,6 @@
 ;;;;; all-the-icons
 (use-package all-the-icons)
 (setq inhibit-compacting-font-caches t)
-;;;;; telephone-modeline
-;(use-package telephone-line)
-;(setq telephone-line-lhs
-;      '((evil   . (telephone-line-evil-tag-segment))
-;        (accent . (telephone-line-vc-segment
-;                   telephone-line-erc-modified-channels-segment
-;                   telephone-line-process-segment))
-;        (nil    . (telephone-line-minor-mode-segment
-;                   telephone-line-buffer-segment))))
-;(setq telephone-line-rhs
-;      '((nil    . (telephone-line-misc-info-segment))
-;        (accent . (telephone-line-major-mode-segment))
-;        (evil   . (telephone-line-airline-position-segment))))
-;
-;(setq telephone-line-primary-left-separator 'telephone-line-tan-left
-;      telephone-line-secondary-left-separator 'telephone-line-tan-hollow-left
-;      telephone-line-primary-right-separator 'telephone-line-tan-right
-;      telephone-line-secondary-right-separator 'telephone-line-tan-hollow-right)
-;(setq telephone-line-height 24
-;      telephone-line-evil-use-short-tag t)
-;
-;(telephone-line-mode 1)
-;;;;; doom-themes
-(use-package doom-themes
-  :ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-acario-dark t)
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-  ;;all-the-icons-install-fonts
 ;;;;; rainbow-delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -331,6 +315,7 @@
 (global-set-key (kbd "<escape>")  'keyboard-escape-quit)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c .") 'org-time-stamp)
 ;; 
 (when window-system
   (load "~/.emacs.d/config/keys.el"))
