@@ -290,6 +290,30 @@
    mode-specific-map
    ("s" . flyspell-correct-word-before-point)))
 
+;;;; Dired-toggle
+(use-package dired-toggle
+  :defer t
+  :bind (("C-SPC" . #'dired-toggle)
+         :map dired-mode-map
+         ("q" . #'dired-toggle-quit)
+         ([remap dired-find-file] . #'dired-toggle-find-file)
+         ([remap dired-up-directory] . #'dired-toggle-up-directory)
+	 ("ret" . #'dired-find-file-other-window)
+         ("C-c C-u" . #'dired-toggle-up-directory))
+  :config
+  (setq dired-toggle-window-size 32)
+  (setq dired-toggle-window-side 'left)
+
+  ;; Optional, enable =visual-line-mode= for our narrow dired buffer:
+  (add-hook 'dired-toggle-mode-hook
+            (lambda () (interactive)
+              (visual-line-mode 1)
+              (setq-local visual-line-fringe-indicators '(nil right-curly-arrow))
+              (setq-local word-wrap nil))))
+(use-package all-the-icons)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;;;;;;(define-key dired-toggle-mode-map "ret" 'dired-find-file-other-window)
+
 ;;; Keybinding
 ;;;; Global keys
 ;;;;; unset keys
@@ -303,6 +327,7 @@
 (global-unset-key (kbd "C-9"))
 (global-unset-key (kbd "C-0"))
 
+
 ;;;;; set keys
 (if (eq system-type 'gnu/linux)
     (progn
@@ -313,6 +338,8 @@
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c .") 'org-time-stamp)
+
+
 ;; 
 (when window-system
   (load "~/.emacs.d/config/keys.el"))
